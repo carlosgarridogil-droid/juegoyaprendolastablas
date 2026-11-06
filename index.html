@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JUEGO Y APRENDO LAS TABLAS DE MULTIPLICAR - EDUCACIÓN PRIMARIA</title>
+    <!-- Fuentes modernas, visuales y redondas -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Quicksand:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Paleta cómic multicolor */
+            --color-borde: #1e293b;
+            --morado-titulo: #7c3aed;
+            --azul-subtitulo: #0284c7;
+            --naranja-boton: #f97316;
+            --sombra-comic: #0f172a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Fredoka', 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #ddd6fe 0%, #e0f2fe 50%, #fef3c7 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Ventana Principal con Borde de Grosor 6px */
+        .ventana-principal {
+            background-color: #ffffff;
+            border: 6px solid var(--color-borde);
+            border-radius: 35px;
+            width: 100%;
+            max-width: 980px;
+            padding: 35px 25px;
+            text-align: center;
+            box-shadow: 0 12px 0px var(--sombra-comic), 0 20px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            animation: aparecer 0.5s ease-out;
+        }
+
+        @keyframes aparecer {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Título Principal Grande */
+        .titulo-principal {
+            color: var(--morado-titulo);
+            font-size: 3.1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            line-height: 1.1;
+            text-shadow: 3px 3px 0px #e9d5ff;
+        }
+
+        /* Subtítulo EDUCACIÓN PRIMARIA - MATEMÁTICAS */
+        .subtitulo {
+            color: var(--azul-subtitulo);
+            font-size: 1.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background-color: #e0f2fe;
+            padding: 8px 24px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 35px;
+            border: 3px solid var(--azul-subtitulo);
+        }
+
+        /* Rejilla de 6 Fichas Temáticas (3x2) */
+        .grid-fichas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin-bottom: 35px;
+        }
+
+        /* Tarjetas con Borde de Grosor 6px */
+        .tarjeta-ficha {
+            border: 6px solid var(--color-borde);
+            border-radius: 25px;
+            padding: 22px 15px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 220px;
+            transition: all 0.2s ease;
+            box-shadow: 0 8px 0px var(--sombra-comic);
+        }
+
+        .tarjeta-ficha:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 0px var(--sombra-comic);
+        }
+
+        .tarjeta-ficha:active {
+            transform: translateY(2px);
+            box-shadow: 0 4px 0px var(--sombra-comic);
+        }
+
+        /* Estilos y Colores Temáticos por Ficha */
+        .ficha-kpop { background-color: #fce7f3; }
+        .ficha-harry { background-color: #fef3c7; }
+        .ficha-minecraft { background-color: #dcfce7; }
+        .ficha-pokemon { background-color: #fee2e2; }
+        .ficha-dragonball { background-color: #ffedd5; }
+        .ficha-monster { background-color: #f3e8ff; }
+
+        /* Iconos 3D Animados Grandes */
+        .icono-3d {
+            font-size: 4rem;
+            margin: 8px 0;
+            line-height: 1;
+            filter: drop-shadow(2px 4px 5px rgba(0, 0, 0, 0.2));
+            transition: transform 0.3s ease;
+            animation: flotar 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes flotar {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-8px) rotate(4deg); }
+        }
+
+        .tarjeta-ficha:hover .icono-3d {
+            transform: scale(1.22) rotate(6deg);
+            animation-play-state: paused;
+        }
+
+        .titulo-tematico {
+            color: var(--color-borde);
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 5px 0;
+            line-height: 1.2;
+        }
+
+        .boton-jugar {
+            font-size: 0.9rem;
+            color: #ffffff;
+            background-color: var(--color-borde);
+            font-weight: 700;
+            padding: 6px 18px;
+            border-radius: 14px;
+            margin-top: 5px;
+            transition: background-color 0.2s ease;
+        }
+
+        .tarjeta-ficha:hover .boton-jugar {
+            background-color: var(--naranja-boton);
+        }
+
+        /* Créditos Pie de Página */
+        .creditos {
+            border-top: 4px dashed #cbd5e1;
+            padding-top: 20px;
+            color: #475569;
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        .creditos strong {
+            color: var(--morado-titulo);
+            font-weight: 800;
+        }
+
+        @media (max-width: 850px) {
+            .grid-fichas {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .grid-fichas {
+                grid-template-columns: 1fr;
+            }
+            .titulo-principal { font-size: 2.2rem; }
+            .subtitulo { font-size: 1.1rem; }
+            .ventana-principal { border-width: 5px; padding: 25px 15px; }
+            .tarjeta-ficha { border-width: 5px; }
+            .icono-3d { font-size: 3.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ventana-principal">
+
+        <!-- Encabezado de la aplicación -->
+        <h1 class="titulo-principal">JUEGO Y APRENDO LAS TABLAS DE MULTIPLICAR</h1>
+        <div class="subtitulo">EDUCACIÓN PRIMARIA - MATEMÁTICAS</div>
+
+        <!-- Rejilla con las 6 Fichas Temáticas -->
+        <div class="grid-fichas">
+
+            <!-- Ficha 1: Guerreras KPOP -->
+            <a href="GUERRERAS KPOP v2.0.html" class="tarjeta-ficha ficha-kpop" target="_blank">
+                <div class="icono-3d">🎤</div>
+                <div class="titulo-tematico">Guerreras KPOP</div>
+                <div class="boton-jugar">Jugar ➔</div>
+            </a>
+
+            <!-- Ficha 2: Academia HARRY POTTER -->
+            <a href="ACADEMIA HARRY POTTER v2.0.html" class="tarjeta-ficha ficha-harry" target="_blank">
+                <div class="icono-3d">🪄</div>
+                <div class="titulo-tematico">Academia HARRY POTTER</div>
+                <div class="boton-jugar">Jugar ➔</div>
+            </a>
+
+            <!-- Ficha 3: Academia MINECRAFT -->
+            <a href="Academia MINECRAFT.html" class="tarjeta-ficha ficha-minecraft" target="_blank">
+                <div class="icono-3d">🧱</div>
+                <div class="titulo-tematico">Academia MINECRAFT</div>
+                <div class="boton-jugar">Jugar ➔</div>
+            </a>
+
+            <!-- Ficha 4: Academia POKEMON -->
+            <a href="ACADEMIA POKEMON v2.0.html" class="tarjeta-ficha ficha-pokemon" target="_blank">
+                <div class="icono-3d">⚡</div>
+                <div class="titulo-tematico">Academia POKEMON</div>
+                <div class="boton-jugar">Jugar ➔</div>
+            </a>
+
+            <!-- Ficha 5: Academia DRAGON BALL -->
+            <a href="academia_dragon_ball_z.html" class="tarjeta-ficha ficha-dragonball" target="_blank">
+                <div class="icono-3d">🐉</div>
+                <div class="titulo-tematico">Academia DRAGON BALL</div>
+                <div class="boton-jugar">Jugar ➔</div>
+            </a>
+
+            <!-- Ficha 6: Academia MONSTER HIGH -->
+            <a href="academia_monster_high.html" class="tarjeta-ficha ficha-monster" target="_blank">
+                <div class="icono-3d">🧛‍♀️</div>
+                <div class="titulo-tematico">Academia MONSTER HIGH</div>
+                <div class="boton-jugar">Jugar ➔</div>
+            </a>
+
+        </div>
+
+        <!-- Créditos finales -->
+        <div class="creditos">
+            Elaborado por <strong>Carlos Garrido</strong>
+        </div>
+
+    </div>
+
+</body>
+</html>
